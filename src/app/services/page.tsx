@@ -14,9 +14,12 @@ import {
 
 import { Button } from "~/components/ui/button";
 import {
+  IconDatabase,
   IconDeviceDesktop,
+  IconHeartHandshake,
   IconNetwork,
   IconShieldCheck,
+  IconWorldWww,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -45,6 +48,30 @@ const services = [
     color: "red",
     href: "/services/cybersecurity",
   },
+  {
+    title: "Web Development",
+    description:
+      "Create a stunning website for your business with our web development services, tailored to your specific needs.",
+    icon: <IconWorldWww className="mb-4 h-16 w-16 text-orange-500" />,
+    color: "blue",
+    href: "/services/web-development",
+  },
+  {
+    title: "Data Recovery",
+    description:
+      "Recover lost or corrupted data with our data recovery services, ensuring your important files are safe and secure.",
+    icon: <IconDatabase className="mb-4 h-16 w-16 text-violet-500" />,
+    color: "red",
+    href: "/services/data-recovery",
+  },
+  {
+    title: "IT Consulting",
+    description:
+      "Get expert advice on all things IT with our consulting services, helping you make informed decisions for your business.",
+    icon: <IconHeartHandshake className="mb-4 h-16 w-16 text-emerald-500" />,
+    color: "green",
+    href: "/services/it-consulting",
+  }
 ];
 
 export default function Services() {

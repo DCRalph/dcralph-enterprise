@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
+  CardFooter,
 } from "~/components/ui/card";
 
 import Image from "next/image";
@@ -52,7 +53,7 @@ export default function Home() {
 
       <div className="relative">
         <div className="absolute top-8 z-20 flex w-full justify-center">
-          <h1 className="rounded-xl bg-black/80 p-4 text-3xl lg:text-8xl font-bold text-zinc-100">
+          <h1 className="rounded-xl bg-black/80 p-4 text-3xl font-bold text-zinc-100 lg:text-8xl">
             DCRalph Enterprise
           </h1>
         </div>
@@ -135,7 +136,7 @@ export default function Home() {
       </div>
 
       <div className="w-full max-w-4xl px-4">
-        <Card className="mb-8 mt-8">
+        <Card className="mt-8 transition-shadow hover:shadow-lg">
           <CardHeader>
             <CardTitle>Welcome to DCRalph Enterprise</CardTitle>
             <CardDescription>
@@ -156,10 +157,12 @@ export default function Home() {
               to keeping your operations running smoothly.
             </p>
           </CardContent>
+          <CardFooter>
+            <Link href="/services">
+              <Button variant="default">Learn More</Button>
+            </Link>
+          </CardFooter>
         </Card>
-        <Link href="/services">
-          <Button variant="default">Learn More</Button>
-        </Link>
       </div>
       <Footer />
     </main>
