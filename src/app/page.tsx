@@ -15,85 +15,123 @@ import Image from "next/image";
 import { api } from "~/trpc/react";
 import { Button } from "~/components/ui/button";
 
+import Autoplay from "embla-carousel-autoplay";
+
 // Import the Carousel component
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "~/components/ui/carousel";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 export default function Home() {
   const myUser = api.user.getUser.useQuery();
 
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [selectedSlide, setSelectedSlide] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    setSelectedSlide(carouselApi.selectedScrollSnap());
+
+    carouselApi.on("select", () => {
+      setSelectedSlide(carouselApi.selectedScrollSnap());
+    });
+  }, [carouselApi]);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-50">
       <Nav user={myUser.data} />
-      <h1 className="mb-8 mt-8 text-6xl font-bold text-gray-900">
-        DCRalph Enterprise
-      </h1>
+
       {/* Carousel Component */}
 
-      <Carousel
-        className="w-full"
-        opts={{
-          loop: true,
-        }}
-        setApi={setCarouselApi}
-      >
-        <CarouselContent>
-          <CarouselItem key={1}>
-            <Image
-              src="/home-slide/it-services.jpg"
-              alt="High-quality IT Support"
-              className="h-96 object-cover"
-              width={1920}
-              height={1080}
-            />
-          </CarouselItem>
-          <CarouselItem key={2}>
-            <Image
-              src="/home-slide/computer-repair.jpg"
-              alt="Expert Computer Repair"
-              className="h-96 object-cover"
-              width={1920}
-              height={1080}
-            />
-          </CarouselItem>
-          <CarouselItem key={3}>
-            <Image
-              src="/home-slide/rack.webp"
-              alt="Reliable Network Solutions"
-              className="h-96 object-cover"
-              width={1920}
-              height={1080}
-            />
-          </CarouselItem>
-        </CarouselContent>
-      </Carousel>
+      <div className="relative">
+        <div className="absolute top-8 z-20 flex w-full justify-center">
+          <h1 className="rounded-xl bg-black/80 p-4 text-3xl lg:text-8xl font-bold text-zinc-100">
+            DCRalph Enterprise
+          </h1>
+        </div>
 
-      <div className="mt-4 flex w-full justify-center gap-4">
-        <Button
-          variant={"outline"}
-          className="h-10 w-10 rounded-full"
-          onClick={() => carouselApi?.scrollPrev()}
+        <Carousel
+          className="w-full"
+          opts={{
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 5000,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          setApi={setCarouselApi}
         >
-          <IconArrowLeft />
-        </Button>
-        <Button
-          variant={"outline"}
-          className="h-10 w-10 rounded-full"
-          onClick={() => carouselApi?.scrollNext()}
-        >
-          <IconArrowRight />
-        </Button>
+          <CarouselContent className="h-[32rem]">
+            <CarouselItem key={1}>
+              <Image
+                src="/home-slide/it-services.jpg"
+                alt="High-quality IT Support"
+                className="h-full object-cover"
+                width={1920}
+                height={1080}
+              />
+            </CarouselItem>
+            <CarouselItem key={2}>
+              <Image
+                src="/home-slide/computer-repair.jpg"
+                alt="Expert Computer Repair"
+                className="h-full object-cover"
+                width={1920}
+                height={1080}
+              />
+            </CarouselItem>
+            <CarouselItem key={3}>
+              <Image
+                src="/home-slide/rack.webp"
+                alt="Reliable Network Solutions"
+                className="h-full object-cover"
+                width={1920}
+                height={1080}
+              />
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
+        <div className="absolute bottom-4 mt-4 flex w-full items-center justify-center gap-4">
+          <Button
+            variant={"outline"}
+            className="h-10 w-10 rounded-full"
+            onClick={() => carouselApi?.scrollPrev()}
+          >
+            <IconArrowLeft />
+          </Button>
+          <div className="flex gap-2">
+            {carouselApi &&
+              [...carouselApi.slideNodes()].map((_, index) => {
+                const active = selectedSlide == index;
+                return (
+                  <button
+                    key={index}
+                    className={`h-4 w-4 rounded-full bg-zinc-100 transition-all hover:scale-110 ${active ? "w-6 bg-blue-400" : ""}`}
+                    onClick={() => {
+                      carouselApi?.scrollTo(index);
+                    }}
+                  ></button>
+                );
+              })}
+          </div>
+          <Button
+            variant={"outline"}
+            className="h-10 w-10 rounded-full"
+            onClick={() => carouselApi?.scrollNext()}
+          >
+            <IconArrowRight />
+          </Button>
+        </div>
       </div>
 
       <div className="w-full max-w-4xl px-4">

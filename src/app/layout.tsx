@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const metadata: Metadata = {
   title: "DCRalph Enterprise",
   description: "DCRalph Enterprise",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/dcralph.png" }],
 };
 
 export default async function RootLayout({
