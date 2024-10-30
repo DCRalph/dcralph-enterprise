@@ -6,11 +6,8 @@ import Link from "next/link";
 import type { inferRouterOutputs } from "@trpc/server";
 import { type AppRouter } from "~/server/api/root";
 import {
-  IconBookmarks,
-  IconLayoutDashboard,
   IconLogout,
   IconSettings,
-  IconSpy,
   IconUsers,
 } from "@tabler/icons-react";
 import { Button } from "./ui/button";
