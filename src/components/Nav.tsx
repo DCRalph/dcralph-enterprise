@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import type { inferRouterOutputs } from "@trpc/server";
 import { type AppRouter } from "~/server/api/root";
-import { IconLink } from "@tabler/icons-react";
 import Image from "next/image";
 
 type NavProps = {
