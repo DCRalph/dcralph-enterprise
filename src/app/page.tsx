@@ -29,6 +29,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
+const autoplay = Autoplay({
+  delay: 5000,
+  stopOnInteraction: false,
+  stopOnMouseEnter: true,
+});
+
 export default function Home() {
   const myUser = api.user.getUser.useQuery();
 
@@ -49,8 +55,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center bg-gray-50">
       <Nav user={myUser.data} />
 
-      {/* Carousel Component */}
-
       <div className="relative">
         <div className="absolute top-8 z-20 flex w-full justify-center">
           <h1 className="rounded-xl bg-black/80 p-4 text-3xl font-bold text-zinc-100 lg:text-8xl">
@@ -63,13 +67,7 @@ export default function Home() {
           opts={{
             loop: true,
           }}
-          plugins={[
-            Autoplay({
-              delay: 5000,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true,
-            }),
-          ]}
+          plugins={[autoplay]}
           setApi={setCarouselApi}
         >
           <CarouselContent className="h-[32rem]">
