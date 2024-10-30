@@ -23,7 +23,6 @@ function getUserPermText(user: UserMenuProps["user"]) {
   if (!user) return "Not signed in";
 
   if (user.user?.admin) return "Admin";
-  if (user.user?.spyPixel) return "Spy";
   return "User";
 }
 
@@ -67,38 +66,6 @@ export default function UserMenu({ user }: UserMenuProps) {
 
               {user.user?.requireSetup == false && (
                 <>
-                  <Menu.Item>
-                    <Link
-                      className="flex w-full items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-left font-semibold text-white no-underline transition hover:bg-white/20"
-                      href={"/dashboard"}
-                    >
-                      <IconLayoutDashboard />
-                      Dashboard
-                    </Link>
-                  </Menu.Item>
-
-                  <Menu.Item>
-                    <Link
-                      className="flex w-full items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-left font-semibold text-white no-underline transition hover:bg-white/20"
-                      href={"/bookmarks"}
-                    >
-                      <IconBookmarks />
-                      Bookmarks
-                    </Link>
-                  </Menu.Item>
-
-                  {(user.user?.admin || user.user?.spyPixel) && (
-                    <Menu.Item>
-                      <Link
-                        className="flex w-full items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-left font-semibold text-white no-underline transition hover:bg-white/20"
-                        href={"/spy-pixel"}
-                      >
-                        <IconSpy />
-                        Spy Pixel
-                      </Link>
-                    </Menu.Item>
-                  )}
-
                   <Menu.Item>
                     <Link
                       className="flex w-full items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-left font-semibold text-white no-underline transition hover:bg-white/20"
