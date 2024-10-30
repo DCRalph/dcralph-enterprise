@@ -5,6 +5,23 @@ import type { inferRouterOutputs } from "@trpc/server";
 import { type AppRouter } from "~/server/api/root";
 import Image from "next/image";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { IconMenu } from "@tabler/icons-react";
+
 type NavProps = {
   user?: inferRouterOutputs<AppRouter>["user"]["getUser"];
 };
@@ -43,19 +60,36 @@ export default function Nav({ user }: NavProps) {
             width={1000}
             height={1000}
           />
-          DCRalph Enterprise
+          <span className="hidden lg:block">DCRalph Enterprise</span>
         </Link>
 
-        <div className="mx-auto flex gap-4">
+        <div className="mx-auto hidden gap-4 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="sora text-xl font-bold text-white"
+              className="sora text-base font-bold text-white md:text-xl"
             >
               {item.label}
             </Link>
           ))}
+        </div>
+
+        <div className="ml-auto flex gap-4 lg:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                <IconMenu />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {navItems.map((item) => (
+                <DropdownMenuItem key={item.href} asChild>
+                  <Link href={item.href}>{item.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* <div className="ml-auto flex gap-4">

@@ -157,7 +157,10 @@ export default function Home() {
               to keeping your operations running smoothly.
             </p>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex gap-4">
+            <Link href="/about">
+              <Button variant="default">About us</Button>
+            </Link>
             <Link href="/services">
               <Button variant="default">Learn More</Button>
             </Link>
