@@ -28,24 +28,6 @@ export const requireAuthCB = async (
   return cb({ session });
 };
 
-export const requireSpyPixel = async () => {
-  const session = await getServerAuthSession();
-
-  if (!session) {
-    return false
-  }
-
-  if (session.user.admin) {
-    return true;
-  }
-
-  if (session.user.spyPixel) {
-    return true;
-  }
-
-  return false;
-}
-
 
 export const requireAuthAdmin = async () => {
   const session = await getServerAuthSession();
