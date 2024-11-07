@@ -110,7 +110,8 @@ const FakeCaptcha: React.FC<FakeCaptchaProps> = ({
         </div>
 
         {showPopup && (
-          <div className="absolute -left-96 -top-40 z-50 -ml-1 flex w-96 flex-col items-center rounded-md border bg-white p-2 shadow-lg">
+          <div className="absolute -left-8 md:-left-96 -top-40 z-50 -ml-1 flex w-96 flex-col items-center rounded-md border bg-white p-2 shadow-lg">
+          {/* <div className="-top-50 absolute -left-8 z-40 flex w-96 flex-col items-center rounded-md border bg-white p-2 shadow-lg"> */}
             <div className="h-24 w-full bg-blue-600 p-4">
               <p className="text-lg font-semibold leading-tight text-white">
                 Select all squares with
@@ -154,12 +155,13 @@ const FakeCaptcha: React.FC<FakeCaptchaProps> = ({
             <div className="mt-2 w-full border border-zinc-200"></div>
             <div className="mt-2 flex w-full justify-between">
               <div className="flex gap-2">
-                <button className="p-2 text-gray-500 transition hover:text-gray-700"
-                onClick={() => {
-                  setSelectedSquares([]);
-                  setState(State.unchecked);
-                  setShowPopup(false);
-                }}
+                <button
+                  className="p-2 text-gray-500 transition hover:text-gray-700"
+                  onClick={() => {
+                    setSelectedSquares([]);
+                    setState(State.unchecked);
+                    setShowPopup(false);
+                  }}
                 >
                   <IconRefresh />
                 </button>
