@@ -120,7 +120,7 @@ const FakeCaptcha: React.FC<FakeCaptchaProps> = ({
                 {title}
               </p>
             </div>
-            <div className="relative mt-2 overflow-hidden rounded-md bg-gray-200">
+            <div className="relative mt-2 overflow-hidden bg-gray-200">
               {/* Image */}
               <Image
                 src={image}

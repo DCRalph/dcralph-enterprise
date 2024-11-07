@@ -22,6 +22,25 @@ function createMatrix<N extends number, M extends number>(
   ) as Matrix<N, M>;
 }
 
+const titles = [
+  "220Ω resistor",
+  "330Ω resistor",
+  "470Ω resistor",
+  "680Ω resistor",
+  "1kΩ resistor",
+  "2.2kΩ resistor",
+  "3.3kΩ resistor",
+  "4.7kΩ resistor",
+  "10kΩ resistor",
+  "22kΩ resistor",
+  "47kΩ resistor",
+  "100kΩ resistor",
+  "220kΩ resistor",
+  "330kΩ resistor",
+  "470kΩ resistor",
+  "1MΩ resistor",
+];
+
 export default function Contact() {
   const [formName, setFormName] = useState("");
   const [formEmail, setFormEmail] = useState("");
@@ -29,23 +48,13 @@ export default function Contact() {
   const [formMessage, setFormMessage] = useState("");
   const [formCaptcha, setFormCaptcha] = useState("");
 
+  const captchaTitle = titles[Math.floor(Math.random() * titles.length)];
+
   const handleCaptchaSubmit = (selected: number[]) => {
-    const table = createMatrix(4, 4, 0);
-
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        if (table[i]?.[j] !== undefined) {
-          table[i]![j] = selected.includes(i * 4 + j) ? 1 : 0;
-        }
-      }
-    }
-
-    console.table(table);
-
-    if (selected.length === 4) {
-      setFormCaptcha("verified");
-      return true;
-    }
+    // if (selected.length === 4) {
+    //   setFormCaptcha("verified");
+    //   return true;
+    // }
 
     return false;
   };
@@ -69,10 +78,10 @@ export default function Contact() {
     toast.success("Form submitted successfully!", ToastOptions);
 
     // Send the form data to the server
-    console.log("Name: ", formName);
-    console.log("Email: ", formEmail);
-    console.log("Subject: ", formSubject);
-    console.log("Message: ", formMessage);
+    // console.log("Name: ", formName);
+    // console.log("Email: ", formEmail);
+    // console.log("Subject: ", formSubject);
+    // console.log("Message: ", formMessage);
 
     // Reset the form fields
     setFormName("");
@@ -210,7 +219,7 @@ export default function Contact() {
 
           <FakeCaptcha
             image="/captcha/1.jpg" // Replace with your desired image URL
-            title="220Ω resistor" // Replace with your desired title
+            title={captchaTitle ?? ""}
             onSubmit={handleCaptchaSubmit}
           />
           <button
